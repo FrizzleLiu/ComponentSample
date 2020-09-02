@@ -25,6 +25,13 @@ android {
         // 为什么需要定义这个？因为src代码中有可能需要用到跨模块交互，如果是组件化模块显然不行
         // 切记：不能在android根节点，只能在defaultConfig或buildTypes节点下
         buildConfigField("boolean", "isRelease", String.valueOf(isRelease))
+        // 在gradle文件中配置选项参数值（用于APT传参接收）
+        // 切记：必须写在defaultConfig节点下
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName(), packageNameForAPT: packageNameForAPT]
+            }
+        }
     }
 
     buildTypes {
@@ -56,8 +63,9 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     // 循环引入第三方库
     support.each { k, v -> implementation v }
-
+    //公共组件库
     implementation project(':common')
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'// 公共基础库
+    //注解 引入依赖处理ARouter注解
+    implementation project(path: ':arouter_annotation')
+    annotationProcessor project(':arouter_compiler') // 注解处理器
 }

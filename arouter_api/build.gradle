@@ -1,4 +1,3 @@
-// 公共基础库无须作为组件化模块
 apply plugin: 'com.android.library'
 
 def rootAndroidId = rootProject.ext.androidId
@@ -30,10 +29,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
     implementation support.appcompat
+    //注解 引入依赖处理ARouter注解  因为Elements是在javax.lang包下不能声明在android lib中
+    implementation project(path: ':arouter_annotation')
 
-    // 每个功能子模块既然都要生成APT源文件，而且又是所有模块依赖的公共库
-    // 那么公共基础库依赖路由arouter_api就能向每个子模块提供开放api了
-    api project(':arouter_api') // 路由对外开放api模块
 }
