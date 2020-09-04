@@ -9,7 +9,9 @@ import javax.lang.model.element.Element;
 public class RouterBean {
 
     public enum Type {
-        ACTIVITY
+        ACTIVITY,
+        //跨模块的业务接口
+        CALL
     }
 
     // 枚举类型：Activity

@@ -17,7 +17,7 @@ ext {
             versionName      : "1.0"
     ]
 
-    appId = ["app"     : "com.frizzle.componentsample",
+    appId = ["app"     : "com.frizzle.modular",
              "order"   : "com.frizzle.modular.order",
              "personal": "com.frizzle.modular.personal"]
 
